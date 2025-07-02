@@ -28,11 +28,11 @@ function generateGroupInserts(groups) {
   
   function generateIdolInserts(idols) {
     return idols.map(idol => {
-      return `INSERT INTO idols (DOB, group, stage_name, legal_name) VALUES ('${idol.DOB}', '${idol.group}', '${idol.stage_name}', '${idol.legal_name}');`;
+      return `INSERT INTO idols (birthday, group_name, stage_name, legal_name) VALUES ('${idol.DOB}', '${idol.group}', '${idol.stage_name}', '${idol.legal_name}');`;
     }).join('\n');
   }
 
-  const groupSQL = generateGroupInserts(groups);
+const groupSQL = generateGroupInserts(groups);
 const idolSQL = generateIdolInserts(idols);
 
 const fullSQL = `${groupSQL}\n\n${idolSQL}`;

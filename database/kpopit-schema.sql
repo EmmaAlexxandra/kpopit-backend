@@ -12,7 +12,7 @@ CREATE TABLE groups (
 -- Idols Table
 CREATE TABLE idols (
     birthday INT PRIMARY KEY,
-    group_id INT NOT NULL REFERENCES groups(debut_date),
+    group_name INT NOT NULL REFERENCES groups(group_name),
     stage_name VARCHAR(255) NOT NULL,
     legal_name VARCHAR(255) NOT NULL
 );
