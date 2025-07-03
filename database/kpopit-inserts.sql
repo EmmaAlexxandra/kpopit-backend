@@ -11,33 +11,33 @@ INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20201130, 'Enhypen
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20120408, 'EXO', '#D6C8AC');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20240906, 'MEOVV', '#FFCEEC');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20170113, 'Dreamcatcher', '#8A2A2B');
-INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20180502, 'i-dle', '#5C068C');
+INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20180502, 'I-dle', '#5C068C');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20211201, 'IVE', '#FF1360');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20151020, 'Twice', '#FCC89B');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20230530, 'BOYNEXTDOOR', '#2596BE');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20230904, 'RIIZE', '#FD5E53');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20181024, 'ATEEZ', '#FF5101');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20230710, 'ZEROBASEONE', '#83C6BD');
-INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20220502, 'LE SSERAFIM', '#7BA6DE');
+INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20220502, 'Le Sserafim', '#7BA6DE');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20240325, 'ILLIT', '#D7D9FF');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20201117, 'aespa', '#87CEEB');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20220222, 'NMIXX', '#D67FF7');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20250120, 'KickFlip', '#A2A2A2');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20230705, 'Kiss of Life', '#E395C0');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20240122, 'TWS', '#4169E1');
-INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20171206, 'THE Boyz', '#4682B4');
+INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20171206, 'The Boyz', '#4682B4');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20240228, 'NCT Wish', '#C6FFB2');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20160707, 'NCT 127', '#92FF04');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20160825, 'NCT Dream', '#92F36D');
-INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20180124, 'Fromis_9', '#FEF371');
+INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20180124, 'fromis_9', '#FEF371');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20220722, 'NewJeans', '#323B80');
-INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20230213, 'TripleS', '#FD01FB');
+INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20230213, 'tripleS', '#FD01FB');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20201112, 'StayC', '#FD7190');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20150907, 'Day6', '#009193');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20140801, 'Red Velvet', '#9A0202');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20220302, 'Tempest', '#FFA830');
-INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20230130, '8Turn', '#C06A71');
-INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20220103, 'Kep1er', '#AE72E8');
+INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20230130, '8TURN', '#C06A71');
+INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20220103, 'Ke1per', '#AE72E8');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20200807, 'Treasure', '#00CFFF');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20210315, 'Purple Kiss', '#4B1E47');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20221118, 'Fifty Fifty', '#E99ABE');
@@ -48,7 +48,7 @@ INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20140618, 'Mamamoo
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20201028, 'P1harmony', '#F88360');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20230330, 'Xikers', '#AAAAAA');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20120321, 'BTOB', '#42B4E6');
-INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20220209, 'VIVIZ', '#ACBAE9');
+INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20220209, 'Viviz', '#ACBAE9');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20190117, 'NCT WayV', '#AAF17D');
 
 INSERT INTO idols (birthday, group_name, stage_name, legal_name) VALUES (20010821, '8TURN', 'Myungho', 'Cho Myungho');
@@ -339,14 +339,12 @@ INSERT INTO idols (birthday, group_name, stage_name, legal_name) VALUES (2002101
 INSERT INTO idols (birthday, group_name, stage_name, legal_name) VALUES (20030108, 'tripleS', 'Seoyeon', 'Yoon Seoyeon');
 INSERT INTO idols (birthday, group_name, stage_name, legal_name) VALUES (20030602, 'tripleS', 'Nien', 'Hsu Nientzu');
 INSERT INTO idols (birthday, group_name, stage_name, legal_name) VALUES (20040213, 'tripleS', 'JiYeon', 'Ji Suhyeon');
-INSERT INTO idols (birthday, group_name, stage_name, legal_name) VALUES (20040310, 'tripleS', 'Kotone', '
-Kamimoto Kotone');
+INSERT INTO idols (birthday, group_name, stage_name, legal_name) VALUES (20040310, 'tripleS', 'Kotone', 'Kamimoto Kotone');
 INSERT INTO idols (birthday, group_name, stage_name, legal_name) VALUES (2004120401, 'tripleS', 'Chaeyeon', 'Kim Chaeyeon');
 INSERT INTO idols (birthday, group_name, stage_name, legal_name) VALUES (20050203, 'tripleS', 'Yubin', 'Gong Yubin');
 INSERT INTO idols (birthday, group_name, stage_name, legal_name) VALUES (20051120, 'tripleS', 'Kaede', 'Yamada Kaede');
 INSERT INTO idols (birthday, group_name, stage_name, legal_name) VALUES (20060403, 'tripleS', 'Shion', 'Park Shion');
-INSERT INTO idols (birthday, group_name, stage_name, legal_name) VALUES (20060412, 'tripleS', 'Lynn', '
-Kawakami Rin');
+INSERT INTO idols (birthday, group_name, stage_name, legal_name) VALUES (20060412, 'tripleS', 'Lynn', 'Kawakami Rin');
 INSERT INTO idols (birthday, group_name, stage_name, legal_name) VALUES (20061130, 'tripleS', 'Sullin', 'Pirada Bunraksa');
 INSERT INTO idols (birthday, group_name, stage_name, legal_name) VALUES (20070412, 'tripleS', 'Hyerin', 'Jeon Hyerin');
 INSERT INTO idols (birthday, group_name, stage_name, legal_name) VALUES (20070502, 'tripleS', 'Chaewon', 'Kim Chaewon');
