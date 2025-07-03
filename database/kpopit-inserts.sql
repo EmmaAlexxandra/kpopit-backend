@@ -20,7 +20,7 @@ INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20181024, 'ATEEZ',
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20230710, 'ZEROBASEONE', '#83C6BD');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20220502, 'LE SSERAFIM', '#7BA6DE');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20240325, 'ILLIT', '#D7D9FF');
-INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20201117, 'AESPA', '#87CEEB');
+INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20201117, 'aespa', '#87CEEB');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20220222, 'NMIXX', '#D67FF7');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20250120, 'KickFlip', '#A2A2A2');
 INSERT INTO groups (debut_date, group_name, hex_code) VALUES (20230705, 'Kiss of Life', '#E395C0');
