@@ -2,6 +2,7 @@ version: '3.9'
 
 services:
   api:
+    container_name: kpopit-api
     build:
       context: ..
       dockerfile: docker/Dockerfile
@@ -17,6 +18,7 @@ services:
     command: npm run dev
 
   db:
+    container_name: kpopit-db-1
     image: postgres:15
     restart: always
     env_file:
@@ -25,8 +27,6 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-
 volumes:
-  pgdata:
-
+  pgdata:  
 

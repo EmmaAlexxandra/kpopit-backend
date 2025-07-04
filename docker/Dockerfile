@@ -18,4 +18,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Run the compiled app
-CMD [ "npm", "start" ]
+CMD [ "npm", "start","dist/index.js"] 

@@ -19,3 +19,13 @@ export async function getAllIdols(_req: Request, res: Response) {
     res.status(500).json({ error: 'Database error' });
   }
 }
+export async function getAllGroups(_req: Request, res: Response) {
+ console.log("get all groups called");
+    try {
+    const result = await pool.query('SELECT * FROM groups;');
+    res.status(200).json(result.rows);
+  } catch (error) {
+    console.error('❌ Error fetching groups:', error);
+    res.status(500).json({ error: 'Database error' });
+  }
+}
