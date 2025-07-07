@@ -29,3 +29,29 @@ export async function getAllGroups(_req: Request, res: Response) {
     res.status(500).json({ error: 'Database error' });
   }
 }
+
+export async function getGroupByID(req: Request, res: Response) {
+  const {param} = req.params;
+  const ID = parseInt(param);
+
+  try {
+    const result = await pool.query("SELECT * FROM groups WHERE debut_date = $1;", [ID]);
+    res.status(200).json(result.rows);
+
+  } catch(e){
+    console.error('Error fetching group by ID:', e);
+    res.status(500).json({ error: 'Database error' });
+  }
+}
+
+export async function getGroupByName(req: Request, res: Response){
+  const {param} = req.params;
+  
+  try{
+    const result = await pool.query("SELECT * FROM groups WHERE group_name ILIKE $1;", [`%${param}%`]);
+    res.status(200).json(result.rows);
+  } catch (e){
+    console.error('Error fetching group by name:', e);
+    res.status(500).json({ error: 'Database error' });
+  }
+}

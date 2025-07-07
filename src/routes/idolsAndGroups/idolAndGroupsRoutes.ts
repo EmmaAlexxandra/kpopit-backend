@@ -58,6 +58,8 @@ router.get('/test', (_req, res) => {
 
 router.get('/idols', Controller.getAllIdols);
 router.get('/groups', Controller.getAllGroups);
+router.get('/groups/debut-date/:param', Controller.getGroupByID);
+router.get('/groups/name/:param', Controller.getGroupByName);
 
 
 export default router;
