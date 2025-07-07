@@ -13,7 +13,7 @@ app.get('/', (_req, res) => {
 });
 
 // Mount router
-app.use('/api/idolsAndGroups', idolAndGroupRoutes);
+app.use('/api/idols-and-groups', idolAndGroupRoutes);
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
