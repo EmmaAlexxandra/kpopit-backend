@@ -79,12 +79,27 @@ export async function getAllMembersGroupDebutDate(req: Request, res: Response) {
        WHERE groups.debut_date = $1;`,
       [numericDate]
     );
-
-    console.log('👉 DB result:', result.rows);
-
     res.status(200).json(result.rows);
   } catch (error) {
     console.error('❌ Error fetching members by debut date:', error);
+    res.status(500).json({ error: 'Database error' });
+  }
+}
+
+export async function getIdolByName(req: Request, res: Response){
+  const { name } = req.params;
+
+  try {
+    const results = await pool.query(
+      `SELECT * FROM idols 
+       INNER JOIN groups ON idols.group_name = groups.group_name
+       WHERE idols.stage_name ILIKE $1 OR idols.legal_name ILIKE $1;`,
+      [`%${name}%`]
+    );
+    
+    res.status(200).json(results.rows);
+  } catch (error) {
+    console.error('❌ Error searching for idol by name:', error);
     res.status(500).json({ error: 'Database error' });
   }
 }
