@@ -27,8 +27,11 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL UNIQUE,
     username VARCHAR(255) NOT NULL UNIQUE,
     bio TEXT NOT NULL DEFAULT '',
+    status TEXT NOT NULL DEFAULT '',
+    subscription subscription_tier NOT NULL DEFAULT 'free',
     profile_picture JSONB,
     biases JSON NOT NULL,
+    content JSONB NOT NULL DEFAULT '{}',
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
