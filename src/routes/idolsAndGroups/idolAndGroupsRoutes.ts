@@ -60,6 +60,8 @@ router.get('/idols', Controller.getAllIdols);
 router.get('/groups', Controller.getAllGroups);
 router.get('/groups/debut-date/:param', Controller.getGroupByID);
 router.get('/groups/name/:param', Controller.getGroupByName);
+router.get('/groups/members/:groupName', Controller.getAllMembersGroupName);
+router.get('/groups/members-by-date/:date', Controller.getAllMembersGroupDebutDate);
 
 
 export default router;
