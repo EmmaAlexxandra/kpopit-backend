@@ -11,7 +11,7 @@ router.get('/test', (_req, res) => {
 router.post('/create', Controller.createUser)
 router.get('/:userId', Controller.getUserById)
 router.get('/username/:username', Controller.getUsersByUserName)
-router.post('/google_login', Controller.loginWithGoogle);
+router.post('/login', Controller.loginWithGoogle);
 
 
 
