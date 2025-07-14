@@ -103,4 +103,58 @@ export async function loginWithGoogle(req: Request, res: Response) {
     }
   }
   
+  export async function updateProfile(req:Request,res:Response){
+    const { id } = req.params;
+    const { bio, status, subscription, profile_picture, biases, content } = req.body;
+
+    const parsedBiases = typeof biases === 'string' ? JSON.parse(biases) : biases;
+    const parsedContent = typeof content === 'string' ? JSON.parse(content) : content;
+    const parsedProfilePicture = typeof profile_picture === 'string'
+  ? JSON.parse(profile_picture)
+  : profile_picture;
+
+
+    console.log("Biases raw:", biases);
+    console.log("Biases typeof:", typeof biases);
+    console.log("Content raw:", content);
+    console.log("Content typeof:", typeof content);
+
+
+
+    try {
+        const result = await pool.query(
+            `UPDATE users
+             SET
+               bio = COALESCE($1, bio),
+               status = COALESCE($2, status),
+               subscription = COALESCE($3, subscription),
+               profile_picture = COALESCE($4, profile_picture),
+               biases = COALESCE($5, biases),
+               content = COALESCE($6, content),
+               updated_at = NOW()
+             WHERE id = $7
+             RETURNING *;`,
+            [
+              bio,
+              status,
+              subscription,
+              JSON.stringify(parsedProfilePicture),
+              JSON.stringify(parsedBiases),
+              JSON.stringify(parsedContent),
+              id
+            ]
+          );
+          
+    
+        if (result.rowCount === 0) {
+          res.status(404).json({ error: 'User not found' });
+          return
+        }
+    
+        res.status(200).json(result.rows[0]);
+      } catch (err) {
+        console.error('❌ Error updating user:', err);
+        res.status(500).json({ error: 'Internal server error' });
+      }
+  }
   
