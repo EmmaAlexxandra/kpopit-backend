@@ -113,14 +113,6 @@ export async function loginWithGoogle(req: Request, res: Response) {
   ? JSON.parse(profile_picture)
   : profile_picture;
 
-
-    console.log("Biases raw:", biases);
-    console.log("Biases typeof:", typeof biases);
-    console.log("Content raw:", content);
-    console.log("Content typeof:", typeof content);
-
-
-
     try {
         const result = await pool.query(
             `UPDATE users
