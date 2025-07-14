@@ -1,15 +1,5 @@
 import { Request, Response } from 'express';
-import pkg from 'pg';
-
-const { Pool } = pkg;
-const pool = new Pool({
-  user: process.env.POSTGRES_USER,
-  password: process.env.POSTGRES_PASSWORD,
-  host: 'db',
-  database: process.env.POSTGRES_DB,
-  port: 5432,
-});
-
+import pool from '../pool'
 export async function getAllIdols(_req: Request, res: Response) {
   try {
     const result = await pool.query('SELECT * FROM idols;');
