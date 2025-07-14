@@ -30,7 +30,7 @@ CREATE TABLE users (
     status TEXT NOT NULL DEFAULT '',
     subscription subscription_tier NOT NULL DEFAULT 'free',
     profile_picture JSONB,
-    biases JSON NOT NULL,
+    biases JSON NOT NULL DEFAULT '[]',
     content JSONB NOT NULL DEFAULT '{}',
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP

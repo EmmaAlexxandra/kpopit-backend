@@ -3,10 +3,13 @@ import dotenv from 'dotenv';
 import idolAndGroupRoutes from './routes/idolsAndGroups/idolAndGroupsRoutes';
 import usersRoutes from './routes/users/usersRoutes';
 
+
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 
 // Confirm server runs
 app.get('/', (_req, res) => {

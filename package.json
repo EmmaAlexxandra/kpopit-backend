@@ -3,40 +3,43 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-"scripts": {
-  "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-  "build": "tsc",
-  "start": "node dist/index.js",
-
-  "docker-build-dev": "docker build -f docker/Dockerfile -t kpopitbackend:latest .",
-
-  "docker-compose-dev": "docker compose -f docker/docker-compose.yml up --build -d", 
-  "docker-compose-up": "docker compose -f docker/docker-compose.yml up -d",
-  "docker-compose-down": "docker compose -f docker/docker-compose.yml down",
-  "docker-compose-stop": "docker stop kpopit-db-1 && docker stop kpopit-api", 
-  "docker-compose-start": "docker start kpopit-db-1 && docker start kpopit-api",
-  "docker-restart-dev": "docker compose -f docker/docker-compose.yml stop && docker compose -f docker/docker-compose.yml up -d --build --no-deps",
-  "database-init-dev": "docker exec -i kpopit-db-1 psql -U myuser -d mydb < database/kpopit-schema.sql",
-  "insert-idol-data-dev": "docker exec -i kpopit-db-1 psql -U myuser -d mydb < database/kpopit-inserts.sql",
-  "open-database-dev": "docker exec -it kpopit-db-1 psql -U myuser -d mydb",
-  "restart-api": "docker restart kpopit-api"
-
-},
-
- 
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "docker-build-dev": "docker build -f docker/Dockerfile -t kpopitbackend:latest .",
+    "docker-compose-dev": "docker compose -f docker/docker-compose.yml up --build -d",
+    "docker-compose-up": "docker compose -f docker/docker-compose.yml up -d",
+    "docker-compose-down": "docker compose -f docker/docker-compose.yml down",
+    "docker-compose-stop": "docker stop kpopit-db-1 && docker stop kpopit-api",
+    "docker-compose-start": "docker start kpopit-db-1 && docker start kpopit-api",
+    "docker-restart-dev": "docker compose -f docker/docker-compose.yml stop && docker compose -f docker/docker-compose.yml up -d --build --no-deps",
+    "database-init-dev": "docker exec -i kpopit-db-1 psql -U myuser -d mydb < database/kpopit-schema.sql",
+    "insert-idol-data-dev": "docker exec -i kpopit-db-1 psql -U myuser -d mydb < database/kpopit-inserts.sql",
+    "open-database-dev": "docker exec -it kpopit-db-1 psql -U myuser -d mydb",
+    "restart-api": "docker restart kpopit-api"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "csv-parse": "^5.6.0",
-    "dotenv": "^17.0.1",
+    "dotenv": "^17.2.0",
     "express": "^5.1.0",
-    "pg": "^8.16.3"
+    "express-session": "^1.18.1",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "pg": "^8.16.3",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
+    "@types/express-session": "^1.18.2",
     "@types/node": "^24.0.8",
+    "@types/passport": "^1.0.17",
+    "@types/passport-google-oauth20": "^2.0.16",
     "@types/pg": "^8.15.4",
+    "@types/uuid": "^10.0.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
   }

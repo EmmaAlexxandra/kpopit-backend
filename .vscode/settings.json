@@ -1,4 +1,5 @@
 {
   "eslint.enable": false,
-  "workbench.colorTheme": "Uno Due Tre (Sprinkles)"
+  "workbench.colorTheme": "Dark Future Scarlet",
+  "cSpell.words": ["uuidv"]
 }
