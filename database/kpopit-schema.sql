@@ -32,6 +32,7 @@ CREATE TABLE users (
     profile_picture JSONB,
     biases JSON NOT NULL DEFAULT '[]',
     content JSONB NOT NULL DEFAULT '{}',
+    votes_used JSON NOT NULL DEFAULT '{}',
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -41,11 +42,10 @@ CREATE TABLE posts (
     id TIMESTAMP PRIMARY KEY DEFAULT CURRENT_TIMESTAMP,
     user_id UUID NOT NULL REFERENCES users(id),
     context JSONB NOT NULL,
-    subscription subscription_tier NOT NULL,
     likes INT NOT NULL DEFAULT 0,
     shares INT NOT NULL DEFAULT 0,
     group_id INT REFERENCES groups(debut_date),
-    idol_birthday JSONB,
+    idol_birthday JSON,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     comments JSON NOT NULL DEFAULT '[]'
