@@ -11,5 +11,6 @@ router.get('/test', (_req, res) => {
 router.get('/all', Controller.getAllPosts);
 router.post('/create', Controller.createPost);
 router.get('/:postId', Controller.getPostById);
+router.get('/user/:userId', Controller.getPostsByUserId);
 
 export default router;

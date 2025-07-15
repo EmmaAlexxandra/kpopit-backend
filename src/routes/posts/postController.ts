@@ -63,3 +63,18 @@ export async function getPostById(req: Request, res: Response) {
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+export async function getPostsByUserId(req: Request, res: Response) {
+    const { userId } = req.params;
+
+    try {
+        const result = await pool.query('SELECT * FROM posts WHERE user_id = $1', [userId]);
+        if (result.rows.length === 0) {
+            res.status(404).json({ error: 'Post not found' });
+        }
+        res.status(200).json(result.rows[0]);
+    } catch (error: any) {
+        console.error('❌ Error fetching post:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
