@@ -72,7 +72,7 @@ export async function getPostsByUserId(req: Request, res: Response) {
         if (result.rows.length === 0) {
             res.status(404).json({ error: 'Post not found' });
         }
-        res.status(200).json(result.rows[0]);
+        res.status(200).json(result.rows);
     } catch (error: any) {
         console.error('❌ Error fetching post:', error);
         res.status(500).json({ error: 'Internal server error' });
