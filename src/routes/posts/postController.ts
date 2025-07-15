@@ -38,3 +38,13 @@ export async function createPost(req: Request, res: Response) {
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+export async function getAllPosts(req: Request, res: Response) {
+    try {
+        const result = await pool.query('SELECT * FROM posts');
+        res.status(200).json(result.rows);
+    } catch (error: any) {
+        console.error('❌ Error fetching posts:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}

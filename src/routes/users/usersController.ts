@@ -149,4 +149,14 @@ export async function loginWithGoogle(req: Request, res: Response) {
         res.status(500).json({ error: 'Internal server error' });
       }
   }
+
+export async function getAllUsers(req: Request, res: Response) {
+  try {
+    const result = await pool.query('SELECT * FROM users');
+    res.status(200).json(result.rows);
+  } catch (error: any) {
+    console.error('❌ Error fetching users:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
   

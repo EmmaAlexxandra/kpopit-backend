@@ -8,6 +8,7 @@ router.get('/test', (_req, res) => {
     res.send('✅ Test route is working!');
   });
 
-  router.post('/create', Controller.createPost);
+router.get('/all', Controller.getAllPosts);
+router.post('/create', Controller.createPost);
 
 export default router;
