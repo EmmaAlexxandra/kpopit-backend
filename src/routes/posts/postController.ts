@@ -94,3 +94,18 @@ export async function getPostByUserName(req:Request,res:Response){
     }
 }
 
+export async function getPostsByGroupId(req: Request, res: Response) {
+    console.log("got to the getPostsByGroupId controller")
+    const { groupId } = req.params;
+
+    try {
+        const result = await pool.query('SELECT * FROM posts WHERE group_id = $1', [groupId]);
+        if (result.rows.length === 0) {
+            res.status(404).json({ error: 'Post not found' });
+        }
+        res.status(200).json(result.rows);
+    } catch (error: any) {
+        console.error('❌ Error fetching post:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
