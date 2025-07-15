@@ -1,5 +1,5 @@
 {
   "eslint.enable": false,
-  "workbench.colorTheme": "Alex's Dark Theme",
+  "workbench.colorTheme": "Base2Tone_LakeDark",
   "cSpell.words": ["uuidv"]
 }
