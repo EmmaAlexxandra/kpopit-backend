@@ -1,5 +1,5 @@
 {
   "eslint.enable": false,
-  "workbench.colorTheme": "Visual Studio 2019 Dark",
+  "workbench.colorTheme": "corgiDarkPastel1b",
   "cSpell.words": ["uuidv"]
 }
