@@ -2,10 +2,10 @@ import { Request, Response } from 'express';
 import pool from '../pool'
 
 export async function createPost(req: Request, res: Response) {
-    var {userID,context,groupID,idolBirthday} = req.body;
+    var {userID,content,groupID,idolBirthday} = req.body;
     console.log(req.body)
 
-    if (!userID || !context ) {
+    if (!userID || !content ) {
         res.status(400).json({ error: 'Missing required fields' });
         return;
 
@@ -15,7 +15,7 @@ export async function createPost(req: Request, res: Response) {
         idolBirthday = '[]';
     }
 
-    const parsedContext = typeof context === 'string' ? JSON.parse(context) : context;
+    const parsedContext = typeof content === 'string' ? JSON.parse(content) : content;
     const parsedIdolBirthday = typeof idolBirthday === 'string' ? JSON.parse(idolBirthday) : idolBirthday;
     
     try {
@@ -26,7 +26,7 @@ export async function createPost(req: Request, res: Response) {
         }
 
         const result = await pool.query(
-            `INSERT INTO posts (user_id, context, group_id, idol_birthday) 
+            `INSERT INTO posts (user_id, content, group_id, idol_birthday) 
              VALUES ($1, $2, $3, $4) RETURNING *;`,
             [userID, JSON.stringify(parsedContext), groupID, JSON.stringify(parsedIdolBirthday)]
         );

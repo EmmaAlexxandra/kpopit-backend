@@ -41,7 +41,7 @@ CREATE TABLE users (
 CREATE TABLE posts (
     id TIMESTAMP PRIMARY KEY DEFAULT CURRENT_TIMESTAMP,
     user_id UUID NOT NULL REFERENCES users(id),
-    context JSONB NOT NULL,
+    content JSONB NOT NULL,
     likes INT NOT NULL DEFAULT 0,
     shares INT NOT NULL DEFAULT 0,
     group_id INT REFERENCES groups(debut_date),
