@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import pool from '../pool'
-import { v4 as uuidv4 } from 'uuid';
 
 export async function createPost(req: Request, res: Response) {
     var {userID,context,groupID,idolBirthday} = req.body;
