@@ -14,5 +14,6 @@ router.get('/:postId', Controller.getPostById);
 router.get('/user/:userId', Controller.getPostsByUserId);
 router.get('/username/:username', Controller.getPostByUserName);
 router.get('/group/:groupId', Controller.getPostsByGroupId);
+router.get('/idol_birthday/:idolBirthday', Controller.getPostsByIdolBirthday);
 
 export default router;

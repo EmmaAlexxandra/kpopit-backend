@@ -109,3 +109,25 @@ export async function getPostsByGroupId(req: Request, res: Response) {
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+export async function getPostsByIdolBirthday(req: Request, res: Response): Promise<any> {
+    const { idolBirthday } = req.params;
+
+    try {
+        const result = await pool.query('SELECT * FROM posts');
+        const filteredPosts = result.rows.filter(post => {
+            return Array.isArray(post.idol_birthday) &&
+                   post.idol_birthday.includes(Number(idolBirthday));
+        });
+
+        if (filteredPosts.length === 0) {
+            return res.status(404).json({ error: 'No posts found for this idol birthday' });
+        }
+
+        return res.status(200).json(filteredPosts);
+
+    } catch (e) {
+        console.error('❌ Error fetching posts by idol birthday:', e);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+}
