@@ -10,5 +10,6 @@ router.get('/test', (_req, res) => {
 
 router.get('/all', Controller.getAllPosts);
 router.post('/create', Controller.createPost);
+router.get('/:postId', Controller.getPostById);
 
 export default router;
