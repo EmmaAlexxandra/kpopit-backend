@@ -115,6 +115,10 @@ export async function getPostsByIdolBirthday(req: Request, res: Response): Promi
 
     try {
         const result = await pool.query('SELECT * FROM posts');
+        const checkIdolBirthday = await pool.query('SELECT * FROM idols WHERE birthday = $1', [idolBirthday]);
+        if (checkIdolBirthday.rows.length === 0) {
+            return res.status(404).json({ error: 'Idol not found' });
+        }
         const filteredPosts = result.rows.filter(post => {
             return Array.isArray(post.idol_birthday) &&
                    post.idol_birthday.includes(Number(idolBirthday));
