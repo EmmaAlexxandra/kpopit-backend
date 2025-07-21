@@ -19,5 +19,7 @@ router.get('/group_name_or_idol_name/:groupOrIdolName', Controller.getPostsByGro
 router.post('/create', Controller.createPost);
 
 router.put('/like_post/:postId', Controller.putLikePost);
+router.put('/share_post/:postId', Controller.putSharePost);
+
 
 export default router;
