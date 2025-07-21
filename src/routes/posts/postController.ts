@@ -114,21 +114,13 @@ export async function getPostsByIdolBirthday(req: Request, res: Response): Promi
     const { idolBirthday } = req.params;
 
     try {
-        const result = await pool.query('SELECT * FROM posts');
         const checkIdolBirthday = await pool.query('SELECT * FROM idols WHERE birthday = $1', [idolBirthday]);
         if (checkIdolBirthday.rows.length === 0) {
             return res.status(404).json({ error: 'Idol not found' });
         }
-        const filteredPosts = result.rows.filter(post => {
-            return Array.isArray(post.idol_birthday) &&
-                   post.idol_birthday.includes(Number(idolBirthday));
-        });
-
-        if (filteredPosts.length === 0) {
-            return res.status(404).json({ error: 'No posts found for this idol birthday' });
-        }
-
-        return res.status(200).json(filteredPosts);
+        const results = await pool.query("SELECT * FROM posts WHERE idol_birthday::jsonb @> $1", [`[${idolBirthday}]`]);
+       
+        return res.status(200).json(results.rows);
 
     } catch (e) {
         console.error('❌ Error fetching posts by idol birthday:', e);

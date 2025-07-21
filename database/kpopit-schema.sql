@@ -45,7 +45,7 @@ CREATE TABLE posts (
     likes INT NOT NULL DEFAULT 0,
     shares INT NOT NULL DEFAULT 0,
     group_id INT REFERENCES groups(debut_date),
-    idol_birthday JSON,
+    idol_birthday JSONB,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     comments JSON NOT NULL DEFAULT '[]'
