@@ -151,6 +151,7 @@ export async function getPostsByGroupNameOrIdolName(req:Request, res:Response){
     }
 }
 
+// TODO: these two need to be changed to track if they have like the post previously
 export async function putLikePost(req: Request, res: Response) {
     const { postId } = req.params;
     
