@@ -9,11 +9,13 @@ router.get('/test', (_req, res) => {
   });
 
 router.get('/all', Controller.getAllPosts);
-router.post('/create', Controller.createPost);
 router.get('/:postId', Controller.getPostById);
 router.get('/user/:userId', Controller.getPostsByUserId);
 router.get('/username/:username', Controller.getPostByUserName);
 router.get('/group/:groupId', Controller.getPostsByGroupId);
 router.get('/idol_birthday/:idolBirthday', Controller.getPostsByIdolBirthday);
+router.get('/group_name_or_idol_name/:groupOrIdolName', Controller.getPostsByGroupNameOrIdolName);
+
+router.post('/create', Controller.createPost);
 
 export default router;

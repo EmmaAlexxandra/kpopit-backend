@@ -127,3 +127,26 @@ export async function getPostsByIdolBirthday(req: Request, res: Response): Promi
         return res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+export async function getPostsByGroupNameOrIdolName(req:Request, res:Response){
+    const { groupOrIdolName } = req.params;
+    try {
+        const checkGroup = await pool.query('SELECT * FROM groups WHERE group_name ILIKE $1', [`%${groupOrIdolName}%`]);
+        const checkIdol = await pool.query('SELECT * FROM idols WHERE stage_name ILIKE $1 OR legal_name ILIKE $1', [`%${groupOrIdolName}%`]);
+        if (checkGroup.rows.length === 0 && checkIdol.rows.length === 0) {
+            res.status(404).json({ error: 'Group or idol not found' });
+            return
+        }
+
+        const results  = await pool.query(`SELECT * FROM posts WHERE content ->> 'text' ILIKE $1;`, [`%${groupOrIdolName}%`]);
+        if (results.rows.length === 0) {
+            res.status(404).json({ error: 'No posts found for this group' });
+            return
+        }
+        res.status(200).json(results.rows);
+
+    } catch (error: any) {
+        console.error('❌ Error fetching posts by group name:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}

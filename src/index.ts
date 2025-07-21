@@ -18,7 +18,7 @@ app.get('/', (_req, res) => {
 });
 
 // Mount router
-app.use('/api/idols-and-groups', idolAndGroupRoutes);
+app.use('/api/idols_and_groups', idolAndGroupRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/posts', postRoutes);
 

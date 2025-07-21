@@ -93,3 +93,4 @@ export async function getIdolByName(req: Request, res: Response){
     res.status(500).json({ error: 'Database error' });
   }
 }
+

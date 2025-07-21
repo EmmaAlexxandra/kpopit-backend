@@ -64,5 +64,4 @@ router.get('/groups/members/:groupName', Controller.getAllMembersGroupName);
 router.get('/groups/members-by-date/:date', Controller.getAllMembersGroupDebutDate);
 router.get('/idols/name/:name', Controller.getIdolByName);
 
-
 export default router;
