@@ -179,6 +179,40 @@ export async function putLikePost(req: Request, res: Response) {
     }
 }
 
+export async function putUnlikePost(req: Request, res: Response) {
+    const { postId } = req.params;
+
+    if (!postId) {
+        res.status(400).json({ error: 'Missing required fields' });
+        return;
+    }
+
+    try {
+        const checkPost = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+        if (checkPost.rows.length === 0) {
+            res.status(404).json({ error: 'Post not found' });
+            return;
+        }
+
+        const checkLikes = checkPost.rows[0].likes;
+        if (checkLikes <= 0) {
+            res.status(400).json({ error: 'Cannot unlike a post with no likes' });
+            return;
+        }
+
+        const results = await pool.query(
+            'UPDATE posts SET likes = likes - 1 WHERE id = $1 RETURNING *;',
+            [postId]
+        );
+        res.status(200).json(results.rows[0]);
+
+    } catch (error) {
+        console.error('❌ Error unliking post:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+
 export async function putSharePost(req: Request, res: Response) {
     const { postId } = req.params;
 
