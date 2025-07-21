@@ -32,6 +32,7 @@ CREATE TABLE users (
     profile_picture JSONB,
     biases JSON NOT NULL DEFAULT '[]',
     content JSONB NOT NULL DEFAULT '{}',
+    -- TODO: add another column in here to track posts liked 
     votes_used JSON NOT NULL DEFAULT '{}',
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
