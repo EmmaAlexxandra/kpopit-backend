@@ -240,3 +240,59 @@ export async function putSharePost(req: Request, res: Response) {
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+//TODO: untested route. Please test
+export async function putAddCommentToPost(req:Request, res:Response){
+    const {postId} = req.params;
+    const {userId, content} = req.body;
+
+    if (!postId || !userId || !content) {
+        res.status(400).json({ error: 'Missing required fields' });
+        return;
+    }
+
+    try {
+        const checkPost = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+        if (checkPost.rows.length === 0) {
+            res.status(404).json({ error: 'Post not found' });
+            return;
+        }
+
+        const checkUser = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
+        if (checkUser.rows.length === 0) {
+            res.status(404).json({ error: 'User not found' });
+            return;
+        }
+        const getCurrentCommentsArray = await pool.query('SELECT comments FROM posts WHERE id = $1', [postId]);
+        if (!Array.isArray(getCurrentCommentsArray)){
+            console.error('Current comments array:', getCurrentCommentsArray);
+            res.status(500).json({ error: 'Internal server error' });
+            return;
+        }
+
+        const usernameQuery  = await pool.query('SELECT username FROM users WHERE id = $1', [userId]);
+        const usernameResult = usernameQuery.rows[0]?.username;
+
+        if (!usernameResult){
+            console.error('Username not found for user ID:', usernameQuery.rows);
+            res.status(404).json({ error: 'Username not found' });
+            return;
+        }
+        const newComment = {
+            "userId": userId,
+            "username":usernameResult,
+            "comment": content,
+        }
+        const updatedComments = [...getCurrentCommentsArray.rows[0].comments, newComment];
+        const results = await pool.query(
+            'UPDATE posts SET comments = $1 WHERE id = $2 RETURNING *;',
+            [JSON.stringify(updatedComments), postId]
+        );
+        res.status(200).json(results.rows[0]);
+        
+        
+
+    } catch (error) {
+        console.error('❌ Error adding comment to post:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
