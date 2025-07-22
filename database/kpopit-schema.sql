@@ -52,13 +52,6 @@ CREATE TABLE posts (
     comments JSON NOT NULL DEFAULT '[]'
 );
 
--- Tags Table
-CREATE TABLE tags (
-    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    tag_string VARCHAR(255) NOT NULL UNIQUE,
-    post_id TIMESTAMP NOT NULL REFERENCES posts(id)
-);
-
 -- Playlists Table
 CREATE TABLE playlists (
     id UUID PRIMARY KEY,
