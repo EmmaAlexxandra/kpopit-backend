@@ -112,6 +112,43 @@ export async function getPostsByGroupNameOrIdolName(req:Request, res:Response){
     }
 }
 
+export async function getAllCommentMadeByUsername(req:Request,res:Response){
+    const {username} = req.params;
+
+    if (!username) {
+        res.status(400).json({ error: 'Missing required fields' });
+        return;
+    }
+
+    try{
+
+        const userCheck = await pool.query('SELECT username FROM users WHERE username = $1', [username]);
+        if (userCheck.rows.length === 0) {
+            res.status(404).json({ error: 'User not found' });
+            return;
+        }
+        const results = await pool.query(`
+            SELECT * FROM posts
+            WHERE EXISTS (
+                SELECT 1
+                FROM jsonb_array_elements(comments::jsonb) AS comment
+                WHERE comment ->> 'username' = $1
+            )
+        `, [username]);
+        
+        if (results.rows.length === 0) {
+            res.status(404).json({ error: 'No comments found for this user' });
+            return;
+        }
+        res.status(200).json(results.rows);
+
+
+    } catch (e){
+        console.error('❌ Error fetching comments made by user:', e);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
 export async function createPost(req: Request, res: Response) {
     var {userID,content,groupID,idolBirthday} = req.body;
     console.log(req.body)

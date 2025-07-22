@@ -15,6 +15,7 @@ router.get('/username/:username', Controller.getPostByUserName);
 router.get('/group/:groupId', Controller.getPostsByGroupId);
 router.get('/idol_birthday/:idolBirthday', Controller.getPostsByIdolBirthday);
 router.get('/group_name_or_idol_name/:groupOrIdolName', Controller.getPostsByGroupNameOrIdolName);
+router.get("/user_comments/:username", Controller.getAllCommentMadeByUsername)
 
 router.post('/create', Controller.createPost);
 
