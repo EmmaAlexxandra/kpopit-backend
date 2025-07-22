@@ -240,7 +240,6 @@ export async function putSharePost(req: Request, res: Response) {
         res.status(500).json({ error: 'Internal server error' });
     }
 }
-//TODO: untested route. Please test
 export async function putAddCommentToPost(req:Request, res:Response){
     const {postId} = req.params;
     const {userId, content} = req.body;
@@ -257,32 +256,26 @@ export async function putAddCommentToPost(req:Request, res:Response){
             return;
         }
 
-        const checkUser = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
+        const checkUser = await pool.query('SELECT username FROM users WHERE id = $1', [userId]);
         if (checkUser.rows.length === 0) {
             res.status(404).json({ error: 'User not found' });
             return;
         }
-        const getCurrentCommentsArray = await pool.query('SELECT comments FROM posts WHERE id = $1', [postId]);
+        const usernameResult = checkUser.rows[0]?.username;
+        const getCurrentComments = await pool.query('SELECT comments FROM posts WHERE id = $1', [postId])
+        const getCurrentCommentsArray = getCurrentComments.rows[0]?.comments 
         if (!Array.isArray(getCurrentCommentsArray)){
             console.error('Current comments array:', getCurrentCommentsArray);
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Could not load comments' });
             return;
         }
-
-        const usernameQuery  = await pool.query('SELECT username FROM users WHERE id = $1', [userId]);
-        const usernameResult = usernameQuery.rows[0]?.username;
-
-        if (!usernameResult){
-            console.error('Username not found for user ID:', usernameQuery.rows);
-            res.status(404).json({ error: 'Username not found' });
-            return;
-        }
+        
         const newComment = {
             "userId": userId,
             "username":usernameResult,
             "comment": content,
         }
-        const updatedComments = [...getCurrentCommentsArray.rows[0].comments, newComment];
+        const updatedComments = [...getCurrentCommentsArray, newComment];
         const results = await pool.query(
             'UPDATE posts SET comments = $1 WHERE id = $2 RETURNING *;',
             [JSON.stringify(updatedComments), postId]

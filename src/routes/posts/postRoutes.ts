@@ -21,7 +21,6 @@ router.post('/create', Controller.createPost);
 router.put('/like_post/:postId', Controller.putLikePost);
 router.put('/unlike_post/:postId', Controller.putUnlikePost);
 router.put('/share_post/:postId', Controller.putSharePost);
-//TODO: untested route. Please test
 router.put('/comment_post/:postId', Controller.putAddCommentToPost);
 
 
