@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import pool from '../pool'
+import { v4 as uuidv4 } from 'uuid';
 export async function getAllPosts(req: Request, res: Response) {
     try {
         const result = await pool.query('SELECT * FROM posts');
@@ -148,6 +149,8 @@ export async function getAllCommentMadeByUsername(req:Request,res:Response){
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+
 
 export async function createPost(req: Request, res: Response) {
     var {userID,content,groupID,idolBirthday} = req.body;
@@ -308,7 +311,7 @@ export async function putAddCommentToPost(req:Request, res:Response){
         }
         
         const newComment = {
-            "userId": userId,
+            "commentId": uuidv4(),
             "username":usernameResult,
             "comment": content,
         }
@@ -327,3 +330,6 @@ export async function putAddCommentToPost(req:Request, res:Response){
     }
 }
 
+async function putEditAComment(req:Request,res:Response){
+  
+}
