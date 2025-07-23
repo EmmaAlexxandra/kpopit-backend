@@ -280,6 +280,8 @@ export async function putSharePost(req: Request, res: Response) {
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+//TODO: might need to edit these later with the username 
 export async function putAddCommentToPost(req:Request, res:Response){
     const {postId} = req.params;
     const {userId, content} = req.body;
