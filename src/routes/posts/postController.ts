@@ -330,6 +330,55 @@ export async function putAddCommentToPost(req:Request, res:Response){
     }
 }
 
-async function putEditAComment(req:Request,res:Response){
-  
+export async function putEditAComment(req:Request,res:Response){
+    const {postId, commentId,userId} = req.params;
+    const { content } = req.body;
+    if (!commentId || !userId || !content) {
+        res.status(400).json({ error: 'Missing required fields' });
+        return;
+    }
+
+    try{
+        const checkPost = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+        if (checkPost.rows.length === 0) {
+            res.status(404).json({ error: 'Post not found' });
+            return;
+        }
+        const checkUser = await pool.query('SELECT username FROM users WHERE id = $1', [userId]);
+        if (checkUser.rows.length === 0) {
+            res.status(404).json({ error: 'User not found' });
+            return;
+        }
+        const usernameResult = checkUser.rows[0]?.username;
+        const result = await pool.query(
+            `UPDATE posts
+            SET comments = (
+            SELECT jsonb_agg(
+                CASE
+                WHEN comment->>'commentId' = $1 THEN $2::jsonb
+                ELSE comment
+                END
+            )
+            FROM jsonb_array_elements(comments::jsonb) AS comment
+            )
+            WHERE EXISTS (
+            SELECT 1
+            FROM jsonb_array_elements(comments::jsonb) AS comment
+            WHERE comment->>'commentId' = $1
+            )
+            AND id = $3
+            RETURNING *;
+            `,[commentId, JSON.stringify({ commentId, username: usernameResult, comment: content }), postId]
+        )
+        if (result.rows.length === 0) {
+            res.status(404).json({ error: 'Comment not found' });
+            return;
+        }
+        res.status(200).json(result.rows[0]);
+
+    } catch (error) {
+        console.error('❌ Error editing comment:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+
 }

@@ -23,6 +23,7 @@ router.put('/like_post/:postId', Controller.putLikePost);
 router.put('/unlike_post/:postId', Controller.putUnlikePost);
 router.put('/share_post/:postId', Controller.putSharePost);
 router.put('/comment_post/:postId', Controller.putAddCommentToPost);
+router.put('/edit_comment/:postId/:commentId/:userId', Controller.putEditAComment);
 
 
 
