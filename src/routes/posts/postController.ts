@@ -332,6 +332,7 @@ export async function putAddCommentToPost(req:Request, res:Response){
     }
 }
 
+//TODO: this will need an auth token to verify the user is the one who made the comment 
 export async function putEditAComment(req:Request,res:Response){
     const {postId, commentId,userId} = req.params;
     const { content } = req.body;
@@ -411,6 +412,47 @@ export async function putUpdatePost(req:Request,res:Response){
 
     }catch(e){
         console.error('❌ Error updating post:', e);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+//TODO: this will need an auth token to verify the user is the one who made the comment
+export async function deleteComment(req:Request,res:Response){
+    const { postId, commentId } = req.params;
+
+    if (!postId || !commentId) {
+        res.status(400).json({ error: 'Missing required fields' });
+        return;
+    }
+
+    try {
+        const checkPost = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+        if (checkPost.rows.length === 0) {
+            res.status(404).json({ error: 'Post not found' });
+            return;
+        }
+
+        const result = await pool.query(
+            `UPDATE posts
+            SET comments = (
+                SELECT jsonb_agg(comment)
+                FROM jsonb_array_elements(comments::jsonb) AS comment
+                WHERE comment->>'commentId' <> $1
+            )
+            WHERE id = $2
+            RETURNING *;`,
+            [commentId, postId]
+        );
+
+        if (result.rows.length === 0) {
+            res.status(404).json({ error: 'Comment not found' });
+            return;
+        }
+
+        res.status(200).json(result.rows[0]);
+
+    } catch (error) {
+        console.error('❌ Error deleting comment:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 }
