@@ -474,7 +474,7 @@ export async function deletePost(req: Request, res: Response) {
         }
 
         await pool.query('DELETE FROM posts WHERE id = $1', [postId]);
-        res.status(204).send().json({ message: 'Post deleted successfully' });
+        res.status(204).json({ message: 'Post deleted successfully' });
 
     } catch (error) {
         console.error('❌ Error deleting post:', error);
