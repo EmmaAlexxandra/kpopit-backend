@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import pool from '../pool'
 import { v4 as uuidv4 } from 'uuid';
+
 export async function getAllPosts(req: Request, res: Response) {
     try {
         const result = await pool.query('SELECT * FROM posts');
@@ -81,7 +82,6 @@ export async function getPostsByIdolBirthday(req: Request, res: Response): Promi
             return res.status(404).json({ error: 'Idol not found' });
         }
         const results = await pool.query("SELECT * FROM posts WHERE idol_birthday::jsonb @> $1", [`[${idolBirthday}]`]);
-       
         return res.status(200).json(results.rows);
 
     } catch (e) {
@@ -383,4 +383,34 @@ export async function putEditAComment(req:Request,res:Response){
         res.status(500).json({ error: 'Internal server error' });
     }
 
+}
+
+//TODO: this will need an auth token to verify the user is the one who made the post
+export async function putUpdatePost(req:Request,res:Response){
+    const {postId} = req.params;
+    const { content,groupId,idolBirthday } = req.body;
+
+    if (!postId || !content) {
+        res.status(400).json({ error: 'Missing required fields' });
+        return;
+    }
+
+    try {
+        const checkPost = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+        if (checkPost.rows.length === 0) {
+            res.status(404).json({ error: 'Post not found' });
+            return;
+        }
+        const results = await pool.query(`
+                UPDATE posts
+                SET content = $1, group_id = $2, idol_birthday = $3,updated_at = NOW()
+                WHERE id = $4
+                RETURNING *;
+            `, [JSON.stringify(content), groupId, JSON.stringify(idolBirthday||[]), postId]);
+        res.status(200).json(results.rows[0]);
+
+    }catch(e){
+        console.error('❌ Error updating post:', e);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 }

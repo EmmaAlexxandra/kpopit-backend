@@ -1,5 +1,6 @@
 {
   "eslint.enable": false,
-  "workbench.colorTheme": "Uno Due Tre (Midnight)",
-  "cSpell.words": ["ILIKE", "uuidv"]
+  "workbench.colorTheme": "Earthsong (rainglow)",
+  "cSpell.words": ["ILIKE", "uuidv"],
+  "DockerRun.DisableAutoGenerateConfig": true
 }

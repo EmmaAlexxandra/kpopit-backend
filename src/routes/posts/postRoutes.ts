@@ -25,7 +25,7 @@ router.put('/share_post/:postId', Controller.putSharePost);
 router.put('/comment_post/:postId', Controller.putAddCommentToPost);
 // hopefully with a token I can shorten this endpoint
 router.put('/edit_comment/:postId/:commentId/:userId', Controller.putEditAComment);
-
+router.put("/edit_post/:postId", Controller.putUpdatePost);
 
 
 export default router;
