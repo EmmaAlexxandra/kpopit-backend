@@ -28,6 +28,7 @@ router.put('/edit_comment/:postId/:commentId/:userId', Controller.putEditACommen
 router.put("/edit_post/:postId", Controller.putUpdatePost);
 
 router.delete("/delete_comment/:postId/:commentId", Controller.deleteComment);
+router.delete('/delete_post/:postId', Controller.deletePost);
 
 
 export default router;

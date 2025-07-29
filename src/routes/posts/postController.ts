@@ -456,3 +456,28 @@ export async function deleteComment(req:Request,res:Response){
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+//TODO: this will need an auth token to verify the user is the one who made the post    
+export async function deletePost(req: Request, res: Response) {
+    const { postId } = req.params;
+
+    if (!postId) {
+        res.status(400).json({ error: 'Missing required fields' });
+        return;
+    }
+
+    try {
+        const checkPost = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+        if (checkPost.rows.length === 0) {
+            res.status(404).json({ error: 'Post not found' });
+            return;
+        }
+
+        await pool.query('DELETE FROM posts WHERE id = $1', [postId]);
+        res.status(204).send().json({ message: 'Post deleted successfully' });
+
+    } catch (error) {
+        console.error('❌ Error deleting post:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
