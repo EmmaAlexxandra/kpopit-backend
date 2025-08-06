@@ -58,7 +58,7 @@ CREATE TABLE playlists (
     user_id UUID NOT NULL REFERENCES users(id),
     name VARCHAR(255) NOT NULL,
     platform music_platform NOT NULL,
-    content JSONB NOT NULL,
+    platform_payload JSONB NOT NULL,
     public BOOLEAN NOT NULL DEFAULT TRUE,
     ai_generated BOOLEAN NOT NULL,
     shares INT NOT NULL DEFAULT 0
