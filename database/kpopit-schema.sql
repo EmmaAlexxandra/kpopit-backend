@@ -71,7 +71,8 @@ CREATE TABLE polls (
     title VARCHAR(255) NOT NULL,
     options JSONB NOT NULL,
     poll_type VARCHAR(100) NOT NULL,
-    closing_date TIMESTAMP NOT NULL
+    closing_date TIMESTAMP NOT NULL,
+    comments JSON NOT NULL DEFAULT '[]'
 );
 
 -- notifications Table
