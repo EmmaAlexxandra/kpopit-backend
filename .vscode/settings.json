@@ -1,6 +1,6 @@
 {
   "eslint.enable": false,
-  "workbench.colorTheme": "Tokyo Cat Light",
+  "workbench.colorTheme": "Origamid",
   "cSpell.words": ["ILIKE", "uuidv"],
   "DockerRun.DisableAutoGenerateConfig": true
 }

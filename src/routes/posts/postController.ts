@@ -204,14 +204,14 @@ export async function putLikePost(req: Request, res: Response) {
     try {
         const checkPost = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
         if( checkPost.rows.length === 0 ) {
-          res.status(404).json({ error: 'Post not found' });
-          return;
+            res.status(404).json({ error: 'Post not found' });
+            return;
         }
         
         const results = await pool.query(
             'UPDATE posts SET likes = likes + 1 WHERE id = $1 RETURNING *;',
             [postId]
-          );
+        );
         res.status(200).json(results.rows[0]);
 
     } catch (error){
