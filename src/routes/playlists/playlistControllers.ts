@@ -41,3 +41,34 @@ export async function getAllPlaylistsByUserId(req:Request,res:Response){
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+export async function  getAllPlaylistByUserName(req:Request, res:Response){
+    const {username} = req.params
+
+    if(!username){
+        res.status(400).json({error:"Missing Required Fields"})
+    }
+
+    try {
+        const checkUser = await pool.query('SELECT id FROM users WHERE username = $1', [username]);
+        if (checkUser.rows.length === 0) {
+            res.status(404).json({ error: 'User not found' });
+            return;
+        }
+        const userIdResult = checkUser.rows[0]?.id;
+        if (!userIdResult){
+            res.status(404).json({error:"user id not found"})
+            console.log(userIdResult)
+        }
+
+        const results = await pool.query("SELECT * FROM playlists WHERE user_id = $1",[userIdResult])
+        if(results.rows.length == 0){
+            res.status(404).json({error:"No playlists created by this user"})
+        }
+        res.status(200).json(results.rows)
+
+    } catch (error){
+        console.error('❌ Error fetching post:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
