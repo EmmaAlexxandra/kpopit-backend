@@ -1,6 +1,6 @@
 {
   "eslint.enable": false,
-  "workbench.colorTheme": "Origamid",
+  "workbench.colorTheme": "Rosé Pine",
   "cSpell.words": ["ILIKE", "uuidv"],
   "DockerRun.DisableAutoGenerateConfig": true
 }

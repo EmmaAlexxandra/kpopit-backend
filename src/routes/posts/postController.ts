@@ -58,7 +58,6 @@ export async function getPostByUserName(req:Request,res:Response){
 }
 
 export async function getPostsByGroupId(req: Request, res: Response) {
-    console.log("got to the getPostsByGroupId controller")
     const { groupId } = req.params;
 
     try {

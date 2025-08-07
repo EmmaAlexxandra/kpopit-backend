@@ -9,5 +9,6 @@ router.get('/test', (_req, res) => {
 });
 
 router.get('/all',Controller.getAlLPublicPlaylists)
+router.get("/:userId",Controller.getAllPlaylistsByUserId)
 
 export default router
