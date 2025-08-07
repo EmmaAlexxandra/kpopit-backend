@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import idolAndGroupRoutes from './routes/idolsAndGroups/idolAndGroupsRoutes';
 import usersRoutes from './routes/users/usersRoutes';
 import postRoutes from './routes/posts/postRoutes';
+import playlistRoutes from "./routes/playlists/playlistRoutes"
+
 
 
 dotenv.config();
@@ -12,7 +14,6 @@ const port = process.env.PORT || 3000;
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
-// Confirm server runs
 app.get('/', (_req, res) => {
   res.send('API is working!');
 });
@@ -21,6 +22,7 @@ app.get('/', (_req, res) => {
 app.use('/api/idols_and_groups', idolAndGroupRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/posts', postRoutes);
+app.use('/api/playlists',playlistRoutes)
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
