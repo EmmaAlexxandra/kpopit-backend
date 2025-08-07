@@ -1,4 +1,4 @@
-import { Request, Response, Res } from 'express';
+import { Request, Response } from 'express';
 import pool from "../pool";
 import { v4 as uuidv4 } from 'uuid';
 
