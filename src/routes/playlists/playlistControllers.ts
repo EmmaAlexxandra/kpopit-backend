@@ -137,7 +137,7 @@ export async function putEditPlaylist(req:Request,res:Response){
         }
         const checkCreator = await pool.query("SELECT * FROM playlists WHERE id = $1 AND user_id = $2",[playlistId,userId])
         if (checkCreator.rows.length === 0){
-            res.status(404).json({error: "The user did not create this playlist"})
+            res.status(401).json({error: "The user did not create this playlist"})
         }
 
         const result = await pool.query(`
@@ -153,4 +153,34 @@ export async function putEditPlaylist(req:Request,res:Response){
         res.status(500).json({ error: 'Internal server error' });
     }
 
+}
+//TODO test this 
+export async function putUpdateShares(req:Request,res:Response){
+    const { playlistId } = req.params
+
+    if (!playlistId){
+        res.status(404).json({error: "Missing Required Fields"})
+    }
+    try {
+        const checkPlaylist = await pool.query("SELECT * FROM playlists WHERE id = $1",[playlistId])
+        if (checkPlaylist.rows.length === 0){
+            res.status(404).json({error: "This playlist does not exist"})
+        }
+        const isPublic = checkPlaylist.rows[0].public
+        if (isPublic === false){
+            res.status(403).json({error: "Playlist is private"})
+        }
+        const result = await pool.query(`
+                UPDATE playlists SET shares = shares + 1
+                WHERE id = $1
+                RETURNING *
+            `,[playlistId])
+        
+        res.status(200).json(result.rows[0])
+
+
+    } catch (e){
+        console.error('❌ Error fetching post:', e);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 }
