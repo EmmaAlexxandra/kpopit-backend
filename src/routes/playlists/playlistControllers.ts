@@ -94,3 +94,30 @@ export async function getPlaylistById(req:Request,res:Response){
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+export async function postPlaylist(req:Request,res:Response){
+    const {userId,name,platform,platformPayload,isAiGen} = req.body
+
+    if(!userId || !name || !platform || !platformPayload || !isAiGen){
+        res.status(400).json({error:"Missing Required Fields"})
+    }
+
+    try {
+        const id = uuidv4()
+        const parsedPlatformPayload = typeof platformPayload ==='string' ? JSON.parse(platformPayload) : platformPayload
+
+        const result = await pool.query(
+            `INSERT INTO playlists (
+                id, user_id, name, platform, platform_payload, ai_generated
+            ) VALUES (
+                $1, $2, $3, $4, $5, $6
+            ) RETURNING *`,
+            [id, userId, name, platform, JSON.stringify(parsedPlatformPayload), isAiGen]
+        )
+        res.status(201).json(result.rows[0])
+        
+    } catch (e){
+        console.error('❌ Error fetching post:', e);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}

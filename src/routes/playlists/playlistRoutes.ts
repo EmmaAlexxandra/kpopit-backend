@@ -13,4 +13,6 @@ router.get("/user_id/:userId",Controller.getAllPlaylistsByUserId)
 router.get('/username/:username',Controller.getAllPlaylistByUserName)
 router.get('/playlist_id/:playlistId', Controller.getPlaylistById)
 
+router.post('/post_playlist',Controller.postPlaylist)
+
 export default router
