@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import pool from "../pool";
 import { v4 as uuidv4 } from 'uuid';
+import { error } from 'console';
 
 export async function getAlLPublicPlaylists(req:Request,res:Response){
     try {
@@ -120,4 +121,36 @@ export async function postPlaylist(req:Request,res:Response){
         console.error('❌ Error fetching post:', e);
         res.status(500).json({ error: 'Internal server error' });
     }
+}
+
+export async function putEditPlaylist(req:Request,res:Response){
+    const { playlistId } = req.params
+    const {userId,name,platformPayload} = req.body
+
+    if (!playlistId || !name || !platformPayload ) {
+        res.status(400).json({error:"Missing Required Fields"})
+    }
+    try {
+        const checkPlaylist = await pool.query("SELECT name FROM playlists WHERE id = $1",[playlistId])
+        if (checkPlaylist.rows.length === 0){
+            res.status(404).json({error: "This playlist does not exist"})
+        }
+        const checkCreator = await pool.query("SELECT * FROM playlists WHERE id = $1 AND user_id = $2",[playlistId,userId])
+        if (checkCreator.rows.length === 0){
+            res.status(404).json({error: "The user did not create this playlist"})
+        }
+
+        const result = await pool.query(`
+                UPDATE playlists 
+                SET name = $1,platform_payload = $2
+                WHERE id = $3
+                RETURNING *
+            `,[name,platformPayload,playlistId])
+        res.status(200).json(result.rows[0])
+
+    } catch (e) {
+        console.error('❌ Error fetching post:', e);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+
 }
