@@ -116,16 +116,16 @@ export async function loginWithGoogle(req: Request, res: Response) {
     try {
         const result = await pool.query(
             `UPDATE users
-             SET
-               bio = COALESCE($1, bio),
-               status = COALESCE($2, status),
-               subscription = COALESCE($3, subscription),
-               profile_picture = COALESCE($4, profile_picture),
-               biases = COALESCE($5, biases),
-               content = COALESCE($6, content),
-               updated_at = NOW()
-             WHERE id = $7
-             RETURNING *;`,
+              SET
+              bio = COALESCE($1, bio),
+              status = COALESCE($2, status),
+              subscription = COALESCE($3, subscription),
+              profile_picture = COALESCE($4, profile_picture),
+              biases = COALESCE($5, biases),
+              content = COALESCE($6, content),
+              updated_at = NOW()
+              WHERE id = $7
+              RETURNING *;`,
             [
               bio,
               status,
