@@ -26,7 +26,7 @@ function generateIdolInserts(idols) {
   }).join("\n");
 }
 
-const groups = await loadFile("./kpopit_groups.csv");
+const groups = await loadFile("./kpopit_ groups.csv");
 const idols = await loadFile("./kpopit_idols.csv");
 
 console.log("✅ Sample group:", groups[0]);
