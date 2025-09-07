@@ -212,3 +212,26 @@ export async function putPublicOrPrivatePlaylist(req:Request,res:Response){
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+//TODO will need to verify the user that created this post
+export async function deleteAPlaylist(req:Request,res:Response){
+    const {playlistId} = req.params
+
+    if (!playlistId){
+        res.status(404).json({error: "Missing Required Fields"})
+    }
+
+    try {
+        const checkPlaylist = await pool.query('SELECT * FROM playlists WHERE id = $1 ',[playlistId])
+        if(checkPlaylist.rows.length == 0){
+            res.status(404).json({error: "Playlist Not Found"})
+        }
+
+        await pool.query('DELETE FROM playlists WHERE id = $1',[playlistId])
+        res.status(204).json({message:"Playlist Successfully Deleted"})
+
+    } catch (e){
+        console.error('❌ Error fetching Playlist:', e);
+        res.status(500).json({ error: 'Internal server error' });    
+    }
+}

@@ -19,4 +19,6 @@ router.put('/edit_playlist/:playlistId', Controller.putEditPlaylist)
 router.put('/share_playlist/:playlistId',Controller.putUpdateShares)
 router.put('/change_privacy_playlist/:playlistId',Controller.putPublicOrPrivatePlaylist)
 
+router.delete("/delete_playlist/:playlistId",Controller.deleteAPlaylist)
+
 export default router
