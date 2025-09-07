@@ -154,7 +154,7 @@ export async function putEditPlaylist(req:Request,res:Response){
     }
 
 }
-//TODO test this 
+
 export async function putUpdateShares(req:Request,res:Response){
     const { playlistId } = req.params
 

@@ -16,7 +16,6 @@ router.get('/playlist_id/:playlistId', Controller.getPlaylistById)
 router.post('/post_playlist',Controller.postPlaylist)
 
 router.put('/edit_playlist/:playlistId', Controller.putEditPlaylist)
-//TODO this is untested 
 router.put('/share_playlist/:playlistId',Controller.putUpdateShares)
 
 export default router
