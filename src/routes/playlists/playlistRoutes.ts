@@ -17,5 +17,6 @@ router.post('/post_playlist',Controller.postPlaylist)
 
 router.put('/edit_playlist/:playlistId', Controller.putEditPlaylist)
 router.put('/share_playlist/:playlistId',Controller.putUpdateShares)
+router.put('/change_privacy_playlist/:playlistId',Controller.putPublicOrPrivatePlaylist)
 
 export default router

@@ -184,3 +184,31 @@ export async function putUpdateShares(req:Request,res:Response){
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+//TODO: will need to match to make sure who created this matches up
+export async function putPublicOrPrivatePlaylist(req:Request,res:Response){
+    const { playlistId } = req.params
+
+    if (!playlistId){
+        res.status(404).json({error: "Missing Required Fields"})
+    }
+    
+    try {
+        const checkPlaylist = await pool.query("SELECT * FROM playlists WHERE id = $1",[playlistId])
+        if (checkPlaylist.rows.length === 0){
+            res.status(404).json({error: "This playlist does not exist"})
+        }
+        const isPublic = checkPlaylist.rows[0].public
+        
+        const result = await pool.query(`
+                UPDATE playlists SET public = $1
+                WHERE id = $2
+                RETURNING *
+            `,[!isPublic,playlistId])
+        res.status(200).json(result.rows[0])
+        
+    } catch(e){
+        console.error('❌ Error fetching post:', e);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
